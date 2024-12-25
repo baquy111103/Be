@@ -20,4 +20,9 @@ public class MovieService {
         // Lấy tất cả phim từ cơ sở dữ liệu với điều kiện type == false (phim lẻ)
         return movieRepository.findByType(type);
     }
+
+    public Movie getMovieById(String id) {
+        return movieRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
+    }
 }

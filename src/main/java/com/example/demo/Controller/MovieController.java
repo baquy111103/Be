@@ -4,10 +4,7 @@ import com.example.demo.Model.Movie;
 import com.example.demo.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,10 @@ public class MovieController {
         List<Movie> movies = movieService.getMoviesByType(type);
 
         return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> getMovieById(@PathVariable String id) {
+        return ResponseEntity.ok(movieService.getMovieById(id));
     }
 }
