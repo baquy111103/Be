@@ -1,13 +1,17 @@
 package com.example.demo.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
-@Data
 @Table(name = "movie")
 public class Movie implements Serializable {
     @Id
