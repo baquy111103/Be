@@ -32,6 +32,6 @@ public interface EpisodeRepository extends JpaRepository<Episode, String> {
             "WHERE m.movie_code = :movie_code AND e.episode_number = :episode_number " +
             "AND e.status = 1 ",
             nativeQuery = true)
-    Optional<EpisodeDto> findVideoUrl(@Param("movie_code") String movie_code,
+    List<Object[]> findVideoUrl(@Param("movie_code") String movie_code,
                                       @Param("episode_number") Integer episode_number);
 }

@@ -20,7 +20,7 @@ public class EpisodeController {
         return ResponseEntity.ok(episodes);
     }
 
-        @GetMapping("/{movie_code}/episodes/{episode_number}/video")
+        @GetMapping("/{movie_code}/{episode_number}/video")
     public ResponseEntity<String> getVideoUrl(@PathVariable String movie_code, @PathVariable Integer episode_number) {
         String videoUrl = episodeService.getVideoUrlByEpisode(movie_code, episode_number);
 
