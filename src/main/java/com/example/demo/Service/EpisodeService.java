@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,5 +35,18 @@ public class EpisodeService {
                 (String) result[9],                    // movie_code
                 (String) result[10]                    // movie_name
         )).collect(Collectors.toList());
+    }
+
+    public String getVideoUrlByEpisode(String movie_code, Integer episode_number) {
+        // Sử dụng truy vấn SQL để lấy video_url từ EpisodeDto
+        Optional<EpisodeDto> episodeDtoOpt = episodeRepository.findVideoUrl(movie_code, episode_number);
+
+        // Nếu không tìm thấy, trả về null hoặc thông báo lỗi
+        if (episodeDtoOpt.isEmpty()) {
+            return null;
+        }
+
+        // Trả về video_url từ EpisodeDto
+        return episodeDtoOpt.get().getVideo_url();
     }
 }
