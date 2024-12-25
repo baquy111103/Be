@@ -1,5 +1,4 @@
 package com.example.demo.Model;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +19,7 @@ public class Episode implements Serializable {
     private Long id;
 
     @Column(name="episode_number")
-    private int episode_number;
+    private Integer episode_number;
 
     @Column(name = "description")
     private String description;
@@ -40,4 +39,26 @@ public class Episode implements Serializable {
     @Column(name ="created_at")
     private Date created_at;
 
-}
+    @Column(name ="updated_at")
+    private Date updated_at;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_code", referencedColumnName = "movie_code", nullable = false)
+    private Movie movie;
+
+    @Override
+    public String toString() {
+        return "Episode{" +
+                "id=" + id +
+                ", episode_number=" + episode_number +
+                ", description='" + description + '\'' +
+                ", release_date=" + release_date +
+                ", duration=" + duration +
+                ", video_url='" + video_url + '\'' +
+                ", status=" + status +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                "movie=" + (movie != null ? movie.getMovie_code() : "null") +
+                '}';
+    }
+    }

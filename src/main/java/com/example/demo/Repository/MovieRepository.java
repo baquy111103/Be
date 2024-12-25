@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
@@ -31,4 +32,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             @Param("movie_name") String name,
             @Param("movie_genre") String genre,
             @Param("type") Boolean type);
+
+
+
+//    Optional<Movie> findByMovieCode(String movie_code);
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -66,4 +67,7 @@ public class Movie implements Serializable {
 
     @Column(name = "language")
     private String language;
+
+//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Favorites> favorites;
 }
