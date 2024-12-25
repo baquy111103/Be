@@ -36,7 +36,7 @@ public class EpisodeDto {
         this.movie_name = movie_name;
     }
 
-    public EpisodeDto(  Episode episode) {
+    public EpisodeDto(Episode episode) {
         if (episode != null) {
             this.id = episode.getId();
             this.episode_number = episode.getEpisode_number();

@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Episode;
 import com.example.demo.Model.Movie;
 import com.example.demo.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,10 @@ public class MovieController {
 
         return ResponseEntity.ok(movies);
     }
+
+
+//    @GetMapping("/{id}/episodes")
+//    public ResponseEntity<List<Episode>> getEpisodesByMovieCode(@PathVariable String movie_code) {
+//        return ResponseEntity.ok(movieService.getEpisodesByMovieCode(movie_code));
+//    }
 }

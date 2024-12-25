@@ -1,6 +1,8 @@
 package com.example.demo.Service;
 
+import com.example.demo.Model.Episode;
 import com.example.demo.Model.Movie;
+import com.example.demo.Repository.EpisodeRepository;
 import com.example.demo.Repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ import java.util.List;
 public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private EpisodeRepository episodeRepository;
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
@@ -29,4 +34,8 @@ public class MovieService {
     public List<Movie> searchMovies(String movie_name,String movie_genre ,Boolean type) {
         return movieRepository.searchMovies(movie_name,movie_genre,type);
     }
+
+//    public List<Episode> getEpisodesByMovieCode(String movie_code) {
+//        return episodeRepository.findByMovieCode(movie_code);
+//    }
 }
