@@ -21,8 +21,12 @@ public class MovieService {
         return movieRepository.findByType(type);
     }
 
-    public Movie getMovieById(String id) {
+    public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
+    }
+
+    public List<Movie> searchMovies(String movie_name,String movie_genre ,Boolean type) {
+        return movieRepository.searchMovies(movie_name,movie_genre,type);
     }
 }

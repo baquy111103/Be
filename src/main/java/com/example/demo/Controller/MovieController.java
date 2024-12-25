@@ -27,7 +27,18 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable String id) {
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
         return ResponseEntity.ok(movieService.getMovieById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Movie>> searchMovies(
+            @RequestParam(required = false) String movie_name,
+            @RequestParam(required = false) String movie_genre,
+            @RequestParam(required = false) Boolean type) {
+
+        List<Movie> movies = movieService.searchMovies(movie_name, movie_genre, type);
+
+        return ResponseEntity.ok(movies);
     }
 }
