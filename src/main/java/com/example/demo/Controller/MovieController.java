@@ -44,8 +44,9 @@ public class MovieController {
     }
 
 
-//    @GetMapping("/{id}/episodes")
-//    public ResponseEntity<List<Episode>> getEpisodesByMovieCode(@PathVariable String movie_code) {
-//        return ResponseEntity.ok(movieService.getEpisodesByMovieCode(movie_code));
-//    }
+    @GetMapping("/hot")
+    public ResponseEntity<List<Movie>> getHotMovies() {
+        List<Movie> hotMovies = movieService.getHotMovies();
+        return ResponseEntity.ok(hotMovies);
+    }
 }

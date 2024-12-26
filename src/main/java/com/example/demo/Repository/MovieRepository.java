@@ -35,5 +35,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 
 
-//    Optional<Movie> findByMovieCode(String movie_code);
+    @Query(value = "SELECT * FROM movie WHERE is_hot = 1 AND status = 1 ORDER BY created_at DESC", nativeQuery = true)
+    List<Movie> findHotMovies();
 }
