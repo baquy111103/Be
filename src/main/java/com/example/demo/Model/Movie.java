@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,16 +19,16 @@ import java.util.List;
 public class Movie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name ="id")
     private Long id;
 
-    @Column(name = "movie_code")
+    @Column(name = "movie_code", unique = true)
     private String movie_code;
 
     @Column(name = "movie_name")
     private String movie_name;
 
-    @Column(name = "user_phone")
+    @Column(name ="user_phone")
     private String user_phone;
 
     @Column(name ="description")
@@ -68,6 +70,26 @@ public class Movie implements Serializable {
     @Column(name = "language")
     private String language;
 
-//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Favorites> favorites;
+    @Column(name = "is_hot") // 1 la hot
+    private Integer is_hot;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Episode> episodes;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Movie_actor> movieActors;
+
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", movie_code='" + movie_code + '\'' +
+                ", movie_name='" + movie_name + '\'' +
+                ", movieActorsSize=" + (movieActors != null ? movieActors.size() : 0) +
+                '}';
+    }
+
 }
