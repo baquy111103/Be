@@ -35,7 +35,7 @@ public class MovieService {
         return movieRepository.searchMovies(movie_name,movie_genre,type);
     }
 
-//    public List<Episode> getEpisodesByMovieCode(String movie_code) {
-//        return episodeRepository.findByMovieCode(movie_code);
-//    }
+    public List<Movie> getHotMovies() {
+        return movieRepository.findHotMovies();
+    }
 }
