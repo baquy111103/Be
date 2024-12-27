@@ -14,21 +14,21 @@ import java.util.List;
 public class EpisodeController {
     private final EpisodeService episodeService;
 
-    @GetMapping("/movie")
-    public ResponseEntity<List<EpisodeDto>> getEpisodesByMovieCode(@RequestParam String movie_code) {
-        List<EpisodeDto> episodes = episodeService.getEpisodesByMovieCode(movie_code);
-        return ResponseEntity.ok(episodes);
-    }
-
-        @GetMapping("/{movie_code}/{episode_number}/video")
-    public ResponseEntity<String> getVideoUrl(@PathVariable String movie_code, @PathVariable Integer episode_number) {
-        String videoUrl = episodeService.getVideoUrlByEpisode(movie_code, episode_number);
-
-        // Nếu không tìm thấy videoUrl, trả về 404
-        if (videoUrl == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(videoUrl);
-    }
+//    @GetMapping("/movie")
+//    public ResponseEntity<List<EpisodeDto>> getEpisodesByMovieCode(@RequestParam String movie_code) {
+//        List<EpisodeDto> episodes = episodeService.getEpisodesByMovieCode(movie_code);
+//        return ResponseEntity.ok(episodes);
+//    }
+//
+//        @GetMapping("/{movie_code}/{episode_number}/video")
+//    public ResponseEntity<String> getVideoUrl(@PathVariable String movie_code, @PathVariable Integer episode_number) {
+//        String videoUrl = episodeService.getVideoUrlByEpisode(movie_code, episode_number);
+//
+//        // Nếu không tìm thấy videoUrl, trả về 404
+//        if (videoUrl == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        return ResponseEntity.ok(videoUrl);
+//    }
 }

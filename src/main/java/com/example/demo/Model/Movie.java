@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -71,6 +72,21 @@ public class Movie implements Serializable {
     @Column(name = "is_hot")
     private Integer is_hot;
 
-//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Favorites> favorites;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Episode> episodes;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Movie_actor> movieActors;
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", movie_code='" + movie_code + '\'' +
+                ", movie_name='" + movie_name + '\'' +
+                ", movieActorsSize=" + (movieActors != null ? movieActors.size() : 0) +
+                '}';
+    }
 }

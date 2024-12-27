@@ -13,36 +13,53 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query(
-            value = "SELECT * FROM movie WHERE status = 1",
-            nativeQuery = true
-    )
-    List<Movie> getAllMovies();
-
-    List<Movie> findByType(Boolean type);
-
-    @Query(
-            value = "SELECT * FROM movie " +
-                    "WHERE (:movie_name IS NULL OR movie_name LIKE CONCAT('%', :movie_name, '%')) " +
-                    "AND (:movie_genre IS NULL OR movie_genre LIKE CONCAT('%', :movie_genre, '%'))" +
-                    "AND (:type IS NULL OR type = :type) " +
+            value = "SELECT *" +
+                    "FROM movie " +
+                    "WHERE type = :type " +
                     "AND status = 1 " +
                     "ORDER BY created_at DESC",
-            countQuery = "SELECT count(*) FROM movie " +
-                    "WHERE (:movie_name IS NULL OR movie_name LIKE CONCAT('%', :movie_name, '%')) " +
-                    "AND (:movie_genre IS NULL OR movie_genre LIKE CONCAT('%', :movie_genre, '%'))" +
-                    "AND (:type IS NULL OR type = :type) " +
-                    "AND status = 1",
+            nativeQuery = true
+    )
+    List<Object[]> findMoviesByType(@Param("type") Boolean type);
+
+    @Query(
+            value = "SELECT m.* FROM movie m " +
+                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +  // Sử dụng movie_code thay vì movie_id
+                    "JOIN actor a ON a.actor_code = ma.actor_code " +        // Sử dụng actor_code thay vì actor_id
+                    "WHERE (:movie_name IS NULL OR m.movie_name LIKE CONCAT('%', :movie_name, '%')) " +
+                    "AND (:movie_genre IS NULL OR m.movie_genre LIKE CONCAT('%', :movie_genre, '%')) " +
+                    "AND (:actor_name IS NULL OR a.name LIKE CONCAT('%', :actor_name, '%')) " +
+                    "AND m.status = 1 " +
+                    "ORDER BY m.created_at DESC",
+            countQuery = "SELECT count(*) FROM movie m " +
+                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +  // Sử dụng movie_code thay vì movie_id
+                    "JOIN actor a ON a.actor_code = ma.actor_code " +        // Sử dụng actor_code thay vì actor_id
+                    "WHERE (:movie_name IS NULL OR m.movie_name LIKE CONCAT('%', :movie_name, '%')) " +
+                    "AND (:movie_genre IS NULL OR m.movie_genre LIKE CONCAT('%', :movie_genre, '%')) " +
+                    "AND (:actor_name IS NULL OR a.name LIKE CONCAT('%', :actor_name, '%')) " +
+                    "AND m.status = 1",
             nativeQuery = true
     )
     List<Movie> searchMovies(
-            @Param("movie_name") String name,
-            @Param("movie_genre") String genre,
-            @Param("type") Boolean type);
+            @Param("movie_name") String movieName,
+            @Param("movie_genre") String movieGenre,
+            @Param("actor_name") String actorName
+    );
 
 
     @Query(
-            value = "SELECT * FROM movie WHERE is_hot = 1 AND status = 1",
+            value = "SELECT * FROM movie m WHERE m.movie_code = :movie_code AND m.status = 1",
             nativeQuery = true
     )
-    List<Movie> getHotMovies();
+    Optional<Movie> findByMovieCode(@Param("movie_code") String movieCode);
+
+    @Query(
+            value = "SELECT * FROM movie m WHERE m.is_hot = 1 AND m.status = 1 ORDER BY m.created_at DESC",
+            nativeQuery = true
+    )
+    List<Movie> findHotMovies();
+
+
+    List<Movie> findByStatus(Boolean status);
+
 }

@@ -1,4 +1,6 @@
 package com.example.demo.Model;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,41 +11,41 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "episode")
 public class Episode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="episode_number")
+    @Column(name = "episode_number")
     private Integer episode_number;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name ="release_date")
+    @Column(name = "release_date")
     private Date release_date;
 
     @Column(name = "duration")
     private Double duration;
 
-    @Column (name = "video_url")
+    @Column(name = "video_url")
     private String video_url;
 
     @Column(name = "status")
-    private Boolean status; //0 là xóa, 1 là hoạt động
+    private Boolean status;
 
-    @Column(name ="created_at")
+    @Column(name = "created_at")
     private Date created_at;
 
-    @Column(name ="updated_at")
+    @Column(name = "updated_at")
     private Date updated_at;
 
     @ManyToOne
     @JoinColumn(name = "movie_code", referencedColumnName = "movie_code", nullable = false)
+    @JsonBackReference
     private Movie movie;
 
     @Override
@@ -61,4 +63,4 @@ public class Episode implements Serializable {
                 "movie=" + (movie != null ? movie.getMovie_code() : "null") +
                 '}';
     }
-    }
+}
