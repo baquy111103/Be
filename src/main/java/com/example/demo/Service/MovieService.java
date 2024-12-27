@@ -86,7 +86,7 @@ public class MovieService {
             dto.setMovie_genre(movie.getMovie_genre());
 
             List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
-                    .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName()))
+                    .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar()))
                     .collect(Collectors.toList());
             dto.setMovieActors(actorDTOs);
 
@@ -110,6 +110,11 @@ public class MovieService {
         dto.setStatus(movie.getStatus());
         dto.setLanguage(movie.getLanguage());
         dto.setMovie_genre(movie.getMovie_genre());
+
+        List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
+                .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar()))
+                .collect(Collectors.toList());
+        dto.setMovieActors(actorDTOs);
         return dto;
     }
 
@@ -139,4 +144,9 @@ public class MovieService {
     public List<Episode> getAllEpisodesByMovieCode(String movieCode) {
         return episodeRepository.findEpisodesByMovieCode(movieCode);
     }
+
+//    public List<Movie_ActorDTO> getActorsByMovieCode(String movieCode) {
+//        // Gọi repository để lấy dữ liệu
+//        return movieRepository.findActorsByMovieCode(movieCode);
+//    }
 }

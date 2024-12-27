@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.DTO.Episode_DTO;
 import com.example.demo.DTO.MovieDTO;
+import com.example.demo.DTO.Movie_ActorDTO;
 import com.example.demo.Model.Episode;
 import com.example.demo.Model.Movie;
 import com.example.demo.Service.MovieService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -55,10 +57,19 @@ public class MovieController {
     public ResponseEntity<List<Episode>> getAllEpisodesByMovieCode(@RequestParam String movie_code) {
         List<Episode> episodes = movieService.getAllEpisodesByMovieCode(movie_code);
 
-        if (episodes.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        if (episodes == null || episodes.isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList());
         }
 
         return ResponseEntity.ok(episodes); // Trả về danh sách tập phim theo movie_code
     }
+
+//    @GetMapping("/{movieCode}/actors")
+//    public ResponseEntity<List<Movie_ActorDTO>> getActorsByMovieCode(@PathVariable String movieCode) {
+//        // Lấy danh sách diễn viên của bộ phim theo movie_code
+//        List<Movie_ActorDTO> actors = movieService.getActorsByMovieCode(movieCode);
+//
+//        // Kiểm tra dữ liệu trả về
+//        return ResponseEntity.ok(actors != null ? actors : Collections.emptyList());
+//    }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.DTO.Movie_ActorDTO;
 import com.example.demo.Model.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -61,5 +62,16 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 
     List<Movie> findByStatus(Boolean status);
+
+
+//    @Query(
+//            value = "SELECT a.actor_code, a.name " +
+//                    "FROM actor a " +
+//                    "JOIN movie_actor ma ON ma.actor_code = a.actor_code " +
+//                    "JOIN movie m ON m.movie_code = ma.movie_code " +
+//                    "WHERE m.movie_code = :movieCode AND a.status = 1",
+//            nativeQuery = true
+//    )
+//    List<Movie_ActorDTO> findActorsByMovieCode(@Param("movieCode") String movieCode);
 
 }
