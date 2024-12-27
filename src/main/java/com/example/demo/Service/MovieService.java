@@ -17,12 +17,11 @@ public class MovieService {
     @Autowired
     private EpisodeRepository episodeRepository;
 
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    public List<Movie> getAllActiveMovies() {
+        return movieRepository.getAllMovies();
     }
 
     public List<Movie> getMoviesByType(Boolean type) {
-        // Lấy tất cả phim từ cơ sở dữ liệu với điều kiện type == false (phim lẻ)
         return movieRepository.findByType(type);
     }
 
@@ -35,7 +34,7 @@ public class MovieService {
         return movieRepository.searchMovies(movie_name,movie_genre,type);
     }
 
-//    public List<Episode> getEpisodesByMovieCode(String movie_code) {
-//        return episodeRepository.findByMovieCode(movie_code);
-//    }
+    public List<Movie> getHotMovies() {
+        return movieRepository.getHotMovies();
+    }
 }

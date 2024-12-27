@@ -12,6 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
+    @Query(
+            value = "SELECT * FROM movie WHERE status = 1",
+            nativeQuery = true
+    )
+    List<Movie> getAllMovies();
+
     List<Movie> findByType(Boolean type);
 
     @Query(
@@ -34,6 +40,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             @Param("type") Boolean type);
 
 
-
-//    Optional<Movie> findByMovieCode(String movie_code);
+    @Query(
+            value = "SELECT * FROM movie WHERE is_hot = 1 AND status = 1",
+            nativeQuery = true
+    )
+    List<Movie> getHotMovies();
 }

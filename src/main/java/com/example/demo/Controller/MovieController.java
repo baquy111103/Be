@@ -16,14 +16,14 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public ResponseEntity<List<Movie>> getAllMovies() {
-        return ResponseEntity.ok(movieService.getAllMovies());
+    public ResponseEntity<List<Movie>> getActiveMovies() {
+        List<Movie> movies = movieService.getAllActiveMovies();
+        return ResponseEntity.ok(movies);
     }
 
     @GetMapping("/type")
     public ResponseEntity<List<Movie>> getMoviesByType(@RequestParam Boolean type) {
         List<Movie> movies = movieService.getMoviesByType(type);
-
         return ResponseEntity.ok(movies);
     }
 
@@ -43,9 +43,9 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
-
-//    @GetMapping("/{id}/episodes")
-//    public ResponseEntity<List<Episode>> getEpisodesByMovieCode(@PathVariable String movie_code) {
-//        return ResponseEntity.ok(movieService.getEpisodesByMovieCode(movie_code));
-//    }
+    @GetMapping("/hot")
+    public ResponseEntity<List<Movie>> getHotMovies() {
+        List<Movie> movies = movieService.getHotMovies();
+        return ResponseEntity.ok(movies);
+    }
 }

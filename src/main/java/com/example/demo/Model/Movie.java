@@ -68,6 +68,9 @@ public class Movie implements Serializable {
     @Column(name = "language")
     private String language;
 
+    @Column(name = "is_hot")
+    private Integer is_hot;
+
 //    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Favorites> favorites;
 }
