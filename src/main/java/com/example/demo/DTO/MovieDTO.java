@@ -19,6 +19,7 @@ public class MovieDTO {
     private String video_url;
     private Boolean status;
     private String language;
+    private String movie_genre;
     private List<Episode_DTO> episodes;  // Danh sách tập phim
     private List<Movie_ActorDTO> movieActors;  // Danh sách diễn viên
 }

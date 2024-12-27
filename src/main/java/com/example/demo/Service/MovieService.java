@@ -40,6 +40,7 @@ public class MovieService {
             dto.setVideo_url(movie.getVideo_url());
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
+            dto.setMovie_genre(movie.getMovie_genre());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -47,35 +48,21 @@ public class MovieService {
 
     @Transactional
     public List<MovieDTO> getMoviesByType(Boolean type) {
-        List<Object[]> results = movieRepository.findMoviesByType(type);
+        List<Movie> movies = movieRepository.findMoviesByType(type);
 
-        return results.stream().map(result -> {
+        return movies.stream().map(movie -> {
             MovieDTO dto = new MovieDTO();
-
-            dto.setId(result[0] != null ? ((Number) result[0]).longValue() : null);
-            dto.setMovie_code(result[1] != null ? result[1].toString() : "");
-            dto.setMovie_name(result[2] != null ? result[2].toString() : "");
-            dto.setDescription(result[3] != null ? result[3].toString() : "");
-
-            if (result[4] instanceof Date) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                dto.setRelease_date(sdf.format((Date) result[4]));
-            } else {
-                dto.setRelease_date(result[4] != null ? result[4].toString() : "");
-            }
-
-            dto.setDuration(result[5] != null ? (Double) result[5] : null);
-
-            dto.setImage_url(result[6] != null ? result[6].toString() : "");
-            dto.setVideo_url(result[7] != null ? result[7].toString() : "");
-
-            if (result[8] instanceof Boolean) {
-                dto.setStatus((Boolean) result[8]);  // Boolean
-            } else {
-                dto.setStatus(false);
-            }
-
-            dto.setLanguage(result[9] != null ? result[9].toString() : "");
+            dto.setId(movie.getId());
+            dto.setMovie_code(movie.getMovie_code());
+            dto.setMovie_name(movie.getMovie_name());
+            dto.setDescription(movie.getDescription());
+            dto.setRelease_date(movie.getRelease_date().toString());
+            dto.setDuration(movie.getDuration());
+            dto.setImage_url(movie.getImage_url());
+            dto.setVideo_url(movie.getVideo_url());
+            dto.setStatus(movie.getStatus());
+            dto.setLanguage(movie.getLanguage());
+            dto.setMovie_genre(movie.getMovie_genre());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -96,6 +83,7 @@ public class MovieService {
             dto.setVideo_url(movie.getVideo_url());
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
+            dto.setMovie_genre(movie.getMovie_genre());
 
             List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
                     .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName()))
@@ -121,6 +109,7 @@ public class MovieService {
         dto.setVideo_url(movie.getVideo_url());
         dto.setStatus(movie.getStatus());
         dto.setLanguage(movie.getLanguage());
+        dto.setMovie_genre(movie.getMovie_genre());
         return dto;
     }
 
@@ -140,6 +129,7 @@ public class MovieService {
             dto.setVideo_url(movie.getVideo_url());
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
+            dto.setMovie_genre(movie.getMovie_genre());
             return dto;
         }).collect(Collectors.toList());
     }

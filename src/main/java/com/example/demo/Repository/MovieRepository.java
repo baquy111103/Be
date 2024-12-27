@@ -20,7 +20,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
                     "ORDER BY created_at DESC",
             nativeQuery = true
     )
-    List<Object[]> findMoviesByType(@Param("type") Boolean type);
+    List<Movie> findMoviesByType(@Param("type") Boolean type);
 
     @Query(
             value = "SELECT m.* FROM movie m " +
