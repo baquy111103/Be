@@ -36,7 +36,7 @@ public class Mov_banner implements Serializable
     private Date end_date;
 
     @Column(name = "status")
-    private Boolean status; //0 là xóa, 1 là hoạt động
+    private Boolean status;
 
     @Column(name ="position")
     private Integer position;
