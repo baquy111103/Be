@@ -64,12 +64,4 @@ public class MovieController {
         return ResponseEntity.ok(episodes); // Trả về danh sách tập phim theo movie_code
     }
 
-//    @GetMapping("/{movieCode}/actors")
-//    public ResponseEntity<List<Movie_ActorDTO>> getActorsByMovieCode(@PathVariable String movieCode) {
-//        // Lấy danh sách diễn viên của bộ phim theo movie_code
-//        List<Movie_ActorDTO> actors = movieService.getActorsByMovieCode(movieCode);
-//
-//        // Kiểm tra dữ liệu trả về
-//        return ResponseEntity.ok(actors != null ? actors : Collections.emptyList());
-//    }
 }

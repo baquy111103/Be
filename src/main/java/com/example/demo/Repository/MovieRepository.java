@@ -25,16 +25,16 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query(
             value = "SELECT m.* FROM movie m " +
-                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +  // Sử dụng movie_code thay vì movie_id
-                    "JOIN actor a ON a.actor_code = ma.actor_code " +        // Sử dụng actor_code thay vì actor_id
+                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +
+                    "JOIN actor a ON a.actor_code = ma.actor_code " +
                     "WHERE (:movie_name IS NULL OR m.movie_name LIKE CONCAT('%', :movie_name, '%')) " +
                     "AND (:movie_genre IS NULL OR m.movie_genre LIKE CONCAT('%', :movie_genre, '%')) " +
                     "AND (:actor_name IS NULL OR a.name LIKE CONCAT('%', :actor_name, '%')) " +
                     "AND m.status = 1 " +
                     "ORDER BY m.created_at DESC",
             countQuery = "SELECT count(*) FROM movie m " +
-                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +  // Sử dụng movie_code thay vì movie_id
-                    "JOIN actor a ON a.actor_code = ma.actor_code " +        // Sử dụng actor_code thay vì actor_id
+                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +
+                    "JOIN actor a ON a.actor_code = ma.actor_code " +
                     "WHERE (:movie_name IS NULL OR m.movie_name LIKE CONCAT('%', :movie_name, '%')) " +
                     "AND (:movie_genre IS NULL OR m.movie_genre LIKE CONCAT('%', :movie_genre, '%')) " +
                     "AND (:actor_name IS NULL OR a.name LIKE CONCAT('%', :actor_name, '%')) " +
@@ -62,16 +62,4 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 
     List<Movie> findByStatus(Boolean status);
-
-
-//    @Query(
-//            value = "SELECT a.actor_code, a.name " +
-//                    "FROM actor a " +
-//                    "JOIN movie_actor ma ON ma.actor_code = a.actor_code " +
-//                    "JOIN movie m ON m.movie_code = ma.movie_code " +
-//                    "WHERE m.movie_code = :movieCode AND a.status = 1",
-//            nativeQuery = true
-//    )
-//    List<Movie_ActorDTO> findActorsByMovieCode(@Param("movieCode") String movieCode);
-
 }

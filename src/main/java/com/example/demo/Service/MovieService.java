@@ -86,7 +86,7 @@ public class MovieService {
             dto.setMovie_genre(movie.getMovie_genre());
 
             List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
-                    .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar()))
+                    .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar(),actor.getActor().getStatus()))
                     .collect(Collectors.toList());
             dto.setMovieActors(actorDTOs);
 
@@ -112,7 +112,7 @@ public class MovieService {
         dto.setMovie_genre(movie.getMovie_genre());
 
         List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
-                .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar()))
+                .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar(),actor.getActor().getStatus()))
                 .collect(Collectors.toList());
         dto.setMovieActors(actorDTOs);
         return dto;
