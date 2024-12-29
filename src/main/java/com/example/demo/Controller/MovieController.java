@@ -5,6 +5,7 @@ import com.example.demo.DTO.MovieDTO;
 import com.example.demo.DTO.Movie_ActorDTO;
 import com.example.demo.Model.Episode;
 import com.example.demo.Model.Movie;
+import com.example.demo.Service.EpisodeService;
 import com.example.demo.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import java.util.List;
 public class MovieController {
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private EpisodeService episodeService;
 
     @GetMapping
     public ResponseEntity<List<MovieDTO>> getAllMovies() {
@@ -54,8 +57,8 @@ public class MovieController {
     }
 
     @GetMapping("/episodes")
-    public ResponseEntity<List<Episode>> getAllEpisodesByMovieCode(@RequestParam String movie_code) {
-        List<Episode> episodes = movieService.getAllEpisodesByMovieCode(movie_code);
+    public ResponseEntity<List<Episode_DTO>> getAllEpisodesByMovieCode(@RequestParam String movie_code) {
+        List<Episode_DTO> episodes = movieService.getAllEpisodesByMovieCode(movie_code);
 
         if (episodes == null || episodes.isEmpty()) {
             return ResponseEntity.ok(Collections.emptyList());

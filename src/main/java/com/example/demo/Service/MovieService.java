@@ -140,13 +140,21 @@ public class MovieService {
     }
 
 
-    // Phương thức lấy tất cả các tập phim theo movie_code
-    public List<Episode> getAllEpisodesByMovieCode(String movieCode) {
-        return episodeRepository.findEpisodesByMovieCode(movieCode);
+    @Transactional
+    public List<Episode_DTO> getAllEpisodesByMovieCode(String movie_code) {
+        List<Episode> episodes = episodeRepository.findEpisodesByMovieCode(movie_code);
+
+        return episodes.stream().map(episode -> {
+            Episode_DTO dto = new Episode_DTO();
+            dto.setEpisode_number(episode.getEpisode_number());
+            dto.setMovie_name(episode.getMovie().getMovie_name());
+            dto.setStatus(episode.getStatus());
+            dto.setRelease_date(episode.getRelease_date().toString());
+            dto.setDuration(episode.getDuration());
+            dto.setDescription(episode.getDescription());
+            dto.setVideo_url(episode.getVideo_url());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
-//    public List<Movie_ActorDTO> getActorsByMovieCode(String movieCode) {
-//        // Gọi repository để lấy dữ liệu
-//        return movieRepository.findActorsByMovieCode(movieCode);
-//    }
 }
