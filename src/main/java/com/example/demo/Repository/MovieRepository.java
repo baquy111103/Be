@@ -60,6 +60,12 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     )
     List<Movie> findHotMovies();
 
-
     List<Movie> findByStatus(Boolean status);
+
+    @Query(value = "SELECT m.* " +
+            "FROM Movie m " +
+            "JOIN Category c ON m.category_id = c.category_code " +
+            "WHERE c.name = :category_name AND m.status = 1",
+            nativeQuery = true)
+    List<Movie> findMoviesByCategoryName(@Param("category_name") String category_name);
 }

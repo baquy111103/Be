@@ -5,6 +5,7 @@ import com.example.demo.DTO.MovieDTO;
 import com.example.demo.DTO.Movie_ActorDTO;
 import com.example.demo.Model.Episode;
 import com.example.demo.Model.Movie;
+import com.example.demo.Repository.CategoryRepository;
 import com.example.demo.Repository.EpisodeRepository;
 import com.example.demo.Repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class MovieService {
     @Autowired
     private EpisodeRepository episodeRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Transactional
     public List<MovieDTO> getAllMovies() {
         List<Movie> movies = movieRepository.findByStatus(true);  // true tương ứng với status = 1
@@ -42,6 +46,7 @@ public class MovieService {
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
             dto.setCensorship(movie.getCensorship());
+            dto.setType(movie.getType());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -65,6 +70,7 @@ public class MovieService {
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
             dto.setCensorship(movie.getCensorship());
+            dto.setType(movie.getType());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -87,6 +93,8 @@ public class MovieService {
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
             dto.setCensorship(movie.getCensorship());
+            dto.setType(movie.getType());
+
             List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
                     .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar(),actor.getActor().getStatus()))
                     .collect(Collectors.toList());
@@ -113,6 +121,7 @@ public class MovieService {
         dto.setLanguage(movie.getLanguage());
         dto.setMovie_genre(movie.getMovie_genre());
         dto.setCensorship(movie.getCensorship());
+        dto.setType(movie.getType());
 
         List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
                 .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar(),actor.getActor().getStatus()))
@@ -139,6 +148,7 @@ public class MovieService {
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
             dto.setCensorship(movie.getCensorship());
+            dto.setType(movie.getType());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -161,4 +171,27 @@ public class MovieService {
         }).collect(Collectors.toList());
     }
 
+
+    public List<MovieDTO> getMoviesByCategoryName(String category_name) {
+        List<Movie> movies = movieRepository.findMoviesByCategoryName(category_name);
+
+        return movies.stream().map(movie -> new MovieDTO(
+                movie.getId(),
+                movie.getMovie_code(),
+                movie.getMovie_name(),
+                movie.getDescription(),
+                movie.getRelease_date().toString(),
+                movie.getDuration(),
+                movie.getImage_url(),
+                movie.getVideo_url(),
+                movie.getStatus(),
+                movie.getLanguage(),
+                movie.getMovie_genre(),
+                movie.getCensorship(),
+                movie.getCategory_id(),
+                movie.getType(),
+                null,  // Không load episodes
+                null   // Không load movieActors
+        )).toList();
+    }
 }
