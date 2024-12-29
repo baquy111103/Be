@@ -9,4 +9,6 @@ import java.util.List;
 
 
 public interface FavoritesRepository extends JpaRepository<Favorite, Long> {
+    @Query("SELECT f FROM Favorite f WHERE f.movie.movie_code = :movie_code")
+    Favorite findByMovieCode(@Param("movie_code") String movie_code);
 }
