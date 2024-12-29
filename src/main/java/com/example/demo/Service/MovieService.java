@@ -41,6 +41,7 @@ public class MovieService {
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
+            dto.setCensorship(movie.getCensorship());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -63,6 +64,7 @@ public class MovieService {
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
+            dto.setCensorship(movie.getCensorship());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -84,7 +86,7 @@ public class MovieService {
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
-
+            dto.setCensorship(movie.getCensorship());
             List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
                     .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar(),actor.getActor().getStatus()))
                     .collect(Collectors.toList());
@@ -110,6 +112,7 @@ public class MovieService {
         dto.setStatus(movie.getStatus());
         dto.setLanguage(movie.getLanguage());
         dto.setMovie_genre(movie.getMovie_genre());
+        dto.setCensorship(movie.getCensorship());
 
         List<Movie_ActorDTO> actorDTOs = movie.getMovieActors().stream()
                 .map(actor -> new Movie_ActorDTO(actor.getActor().getActor_code(), actor.getActor().getName(),actor.getActor().getAvatar(),actor.getActor().getStatus()))
@@ -135,6 +138,7 @@ public class MovieService {
             dto.setStatus(movie.getStatus());
             dto.setLanguage(movie.getLanguage());
             dto.setMovie_genre(movie.getMovie_genre());
+            dto.setCensorship(movie.getCensorship());
             return dto;
         }).collect(Collectors.toList());
     }
