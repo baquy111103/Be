@@ -1,44 +1,42 @@
-//package com.example.demo.Service;
-//
-//import com.example.demo.Model.Favorites;
-//import com.example.demo.Model.Movie;
-//import com.example.demo.Repository.FavoritesRepository;
-//import com.example.demo.Repository.MovieRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//
-//@Service
-//public class FavoritesService {
-//    @Autowired
-//    private FavoritesRepository favoriteRepository;
-//
-//    @Autowired
-//    private MovieRepository movieRepository;
-//
-//    public Favorites addFavorite(String user_phone, String movie_code) {
-//        // Tìm movie dựa trên movie_code
-//        Movie movie = movieRepository.findByMovieCode(movie_code)
-//                .orElseThrow(() -> new RuntimeException("Movie not found"));
-//
-//        // Tạo mới Favorites
-//        Favorites favorites = new Favorites();
-//        favorites.setUser_phone(user_phone);
-//        favorites.setMovie(movie);
-//
-//        // Lưu vào database
-//        return favoriteRepository.save(favorites);
-//    }
-//
-//
-//    // Hiển thị danh sách yêu thích
-//    public List<Favorites> getFavorites(String user_phone) {
-//        return favoriteRepository.findByUser_phone(user_phone);
-//    }
-//
-//    // Xóa khỏi danh sách yêu thích
-//    public void removeFavorite(String user_phone, String movie_code) {
-//        favoriteRepository.deleteByUser_phoneAndMovieCode(user_phone, movie_code);
-//    }
-//}
+package com.example.demo.Service;
+
+import com.example.demo.DTO.FavoriteDTO;
+import com.example.demo.DTO.MovieDTO;
+import com.example.demo.Model.Favorite;
+import com.example.demo.Repository.FavoritesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class FavoritesService {
+    @Autowired
+    private FavoritesRepository favoriteRepository;
+
+    @Transactional
+    public List<FavoriteDTO> getAllFavorites() {
+        List<Favorite> favorites = favoriteRepository.findAll();
+        return favorites.stream().map(favorite -> {
+            FavoriteDTO dto = new FavoriteDTO();
+            dto.setActive(favorite.getActive());
+            dto.setFavorite_day(favorite.getFavorite_day().toString());
+            dto.setUnfavorite_day(favorite.getUnfavorite_day() != null ? favorite.getUnfavorite_day().toString() : "Chưa có ngày hủy yêu thích");
+            dto.setMovie_code(favorite.getMovie().getMovie_code());
+            dto.setMovie_name(favorite.getMovie().getMovie_name());
+            dto.setRelease_date(favorite.getMovie().getRelease_date());
+            dto.setImage_url(favorite.getMovie().getImage_url());
+            dto.setMovie_genre(favorite.getMovie().getMovie_genre());
+            dto.setType(favorite.getMovie().getType());
+            dto.setDuration(favorite.getMovie().getDuration());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    // Thêm một bản ghi yêu thích
+    public Favorite addFavorite(Favorite favorite) {
+        return favoriteRepository.save(favorite);
+    }
+}

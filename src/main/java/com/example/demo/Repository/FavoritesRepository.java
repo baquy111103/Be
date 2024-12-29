@@ -1,14 +1,12 @@
-//package com.example.demo.Repository;
-//
-//import com.example.demo.Model.Favorites;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//import java.util.List;
-//
-//
-//public interface FavoritesRepository extends JpaRepository<Favorites, String> {
-//    List<Favorites> findByUser_phone(String user_phone);
-//
-//    void deleteByUser_phoneAndMovieCode(String user_phone, String movie_code);
-//
-//}
+package com.example.demo.Repository;
+
+import com.example.demo.Model.Favorite;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
+
+public interface FavoritesRepository extends JpaRepository<Favorite, Long> {
+}
