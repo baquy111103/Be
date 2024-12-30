@@ -25,8 +25,6 @@ public class MovieService {
     @Autowired
     private EpisodeRepository episodeRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @Transactional
     public List<MovieDTO> getAllMovies() {
