@@ -2,6 +2,7 @@ package com.example.demo.DTO;
 
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -13,7 +14,7 @@ public class MovieDTO {
     private String movie_code;
     private String movie_name;
     private String description;
-    private String release_date;
+    private Date release_date;
     private Double duration;
     private String image_url;
     private String video_url;

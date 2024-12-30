@@ -36,7 +36,7 @@ public class MovieService {
             dto.setMovie_code(movie.getMovie_code());
             dto.setMovie_name(movie.getMovie_name());
             dto.setDescription(movie.getDescription());
-            dto.setRelease_date(movie.getRelease_date().toString());
+            dto.setRelease_date(movie.getRelease_date());
             dto.setDuration(movie.getDuration());
             dto.setImage_url(movie.getImage_url());
             dto.setVideo_url(movie.getVideo_url());
@@ -60,7 +60,7 @@ public class MovieService {
             dto.setMovie_code(movie.getMovie_code());
             dto.setMovie_name(movie.getMovie_name());
             dto.setDescription(movie.getDescription());
-            dto.setRelease_date(movie.getRelease_date().toString());
+            dto.setRelease_date(movie.getRelease_date());
             dto.setDuration(movie.getDuration());
             dto.setImage_url(movie.getImage_url());
             dto.setVideo_url(movie.getVideo_url());
@@ -83,7 +83,7 @@ public class MovieService {
             dto.setMovie_code(movie.getMovie_code());
             dto.setMovie_name(movie.getMovie_name());
             dto.setDescription(movie.getDescription());
-            dto.setRelease_date(movie.getRelease_date().toString());
+            dto.setRelease_date(movie.getRelease_date());
             dto.setDuration(movie.getDuration());
             dto.setImage_url(movie.getImage_url());
             dto.setVideo_url(movie.getVideo_url());
@@ -111,7 +111,7 @@ public class MovieService {
         dto.setMovie_code(movie.getMovie_code());
         dto.setMovie_name(movie.getMovie_name());
         dto.setDescription(movie.getDescription());
-        dto.setRelease_date(movie.getRelease_date().toString());
+        dto.setRelease_date(movie.getRelease_date());
         dto.setDuration(movie.getDuration());
         dto.setImage_url(movie.getImage_url());
         dto.setVideo_url(movie.getVideo_url());
@@ -138,7 +138,7 @@ public class MovieService {
             dto.setMovie_code(movie.getMovie_code());
             dto.setMovie_name(movie.getMovie_name());
             dto.setDescription(movie.getDescription());
-            dto.setRelease_date(movie.getRelease_date().toString());
+            dto.setRelease_date(movie.getRelease_date());
             dto.setDuration(movie.getDuration());
             dto.setImage_url(movie.getImage_url());
             dto.setVideo_url(movie.getVideo_url());
@@ -161,7 +161,7 @@ public class MovieService {
             dto.setEpisode_number(episode.getEpisode_number());
             dto.setMovie_name(episode.getMovie().getMovie_name());
             dto.setStatus(episode.getStatus());
-            dto.setRelease_date(episode.getRelease_date().toString());
+            dto.setRelease_date(episode.getRelease_date());
             dto.setDuration(episode.getDuration());
             dto.setDescription(episode.getDescription());
             dto.setVideo_url(episode.getVideo_url());
@@ -178,7 +178,7 @@ public class MovieService {
                 movie.getMovie_code(),
                 movie.getMovie_name(),
                 movie.getDescription(),
-                movie.getRelease_date().toString(),
+                movie.getRelease_date(),
                 movie.getDuration(),
                 movie.getImage_url(),
                 movie.getVideo_url(),
