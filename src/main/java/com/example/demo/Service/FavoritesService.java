@@ -45,12 +45,13 @@ public class FavoritesService {
 
     @Transactional
     public FavoriteDTO addOrUpdateFavorite(String movie_code) {
-        Favorite favorite = favoriteRepository.findByMovieCode(movie_code);
+        Optional<Favorite> favoriteOpt = favoriteRepository.findByMovieCode(movie_code);
+        Favorite favorite;
 
-        if (favorite != null) {
+        if (favoriteOpt.isPresent()) {
+            favorite = favoriteOpt.get();
             favorite.setActive(true);
-            favorite.setUnfavorite_day(null);
-            favoriteRepository.save(favorite);
+            favorite.setFavorite_day(new Date());
         } else {
             Movie movie = movieRepository.findByMovieCode(movie_code)
                     .orElseThrow(() -> new RuntimeException("Movie not found with movie_code: " + movie_code));
@@ -59,25 +60,30 @@ public class FavoritesService {
             favorite.setMovie(movie);
             favorite.setActive(true);
             favorite.setFavorite_day(new Date());
-            favorite.setUnfavorite_day(null);
-            favoriteRepository.save(favorite);
         }
 
+        // Lưu vào database
+        favoriteRepository.save(favorite);
+
+        // Trả về DTO
         return new FavoriteDTO(favorite);
     }
 
     @Transactional
     public FavoriteDTO updateFavoriteStatusToInactive(String movie_code) {
-        Favorite favorite = favoriteRepository.findByMovieCode(movie_code);
+        Optional<Favorite> favoriteOpt = favoriteRepository.findByMovieCode(movie_code);
 
-        if (favorite != null) {
+        if (favoriteOpt.isPresent()) {
+            Favorite favorite = favoriteOpt.get();
             favorite.setActive(false);
             favorite.setUnfavorite_day(new Date());
+
             favoriteRepository.save(favorite);
+
+            return new FavoriteDTO(favorite);
         } else {
             throw new RuntimeException("Movie not found in favorites with movie_code: " + movie_code);
         }
-
-        return new FavoriteDTO(favorite);
     }
+
 }
