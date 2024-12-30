@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -16,13 +17,13 @@ public class FavoriteDTO {
     private String unfavorite_day;
     private String movie_code;
     private String movie_name;
-    private String release_date;
+    private Date release_date;
     private String image_url;
     private String movie_genre;
     private Boolean type;
     private Double duration;
 
-    public FavoriteDTO(Boolean active,String favorite_day, String unfavorite_day,String movie_code,String movie_name,String release_date,String image_url,String movie_genre,Boolean type,Double duration){
+    public FavoriteDTO(Boolean active,String favorite_day, String unfavorite_day,String movie_code,String movie_name,Date release_date,String image_url,String movie_genre,Boolean type,Double duration){
         this.active = active;
         this.favorite_day = favorite_day;
         this.unfavorite_day = unfavorite_day;
@@ -42,7 +43,7 @@ public class FavoriteDTO {
             this.unfavorite_day = String.valueOf(favorite.getUnfavorite_day());
             this.movie_code = favorite.getMovie() != null ? favorite.getMovie().getMovie_code() : null;
             this.movie_name = favorite.getMovie() != null ? favorite.getMovie().getMovie_name() : null;
-            this.release_date = String.valueOf(favorite.getMovie() != null ? favorite.getMovie().getRelease_date() : null);
+            this.release_date = favorite.getMovie() != null ? favorite.getMovie().getRelease_date() : null;
             this.image_url = favorite.getMovie() != null ? favorite.getMovie().getImage_url() : null;
             this.movie_genre = favorite.getMovie() != null ? favorite.getMovie().getMovie_genre() : null;
             this.type = favorite.getMovie() != null ? favorite.getMovie().getType() : null;

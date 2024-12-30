@@ -3,6 +3,7 @@ package com.example.demo.Model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -40,7 +41,8 @@ public class Movie implements Serializable {
     private Date updated_at;
 
     @Column(name = "release_date")
-    private String release_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private Date release_date;
 
     @Column(name= "duration") //thoi luong cua movie
     private Double duration;
