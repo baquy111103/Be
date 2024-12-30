@@ -24,17 +24,17 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findMoviesByType(@Param("type") Boolean type);
 
     @Query(
-            value = "SELECT m.* FROM movie m " +
-                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +
-                    "JOIN actor a ON a.actor_code = ma.actor_code " +
+            value = "SELECT DISTINCT m.* FROM movie m " +
+                    "LEFT JOIN movie_actor ma ON ma.movie_code = m.movie_code " +
+                    "LEFT JOIN actor a ON a.actor_code = ma.actor_code " +
                     "WHERE (:movie_name IS NULL OR m.movie_name LIKE CONCAT('%', :movie_name, '%')) " +
                     "AND (:movie_genre IS NULL OR m.movie_genre LIKE CONCAT('%', :movie_genre, '%')) " +
                     "AND (:actor_name IS NULL OR a.name LIKE CONCAT('%', :actor_name, '%')) " +
                     "AND m.status = 1 " +
                     "ORDER BY m.created_at DESC",
-            countQuery = "SELECT count(*) FROM movie m " +
-                    "JOIN movie_actor ma ON ma.movie_code = m.movie_code " +
-                    "JOIN actor a ON a.actor_code = ma.actor_code " +
+            countQuery = "SELECT count(DISTINCT m.id) FROM movie m " +
+                    "LEFT JOIN movie_actor ma ON ma.movie_code = m.movie_code " +
+                    "LEFT JOIN actor a ON a.actor_code = ma.actor_code " +
                     "WHERE (:movie_name IS NULL OR m.movie_name LIKE CONCAT('%', :movie_name, '%')) " +
                     "AND (:movie_genre IS NULL OR m.movie_genre LIKE CONCAT('%', :movie_genre, '%')) " +
                     "AND (:actor_name IS NULL OR a.name LIKE CONCAT('%', :actor_name, '%')) " +
@@ -46,6 +46,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             @Param("movie_genre") String movieGenre,
             @Param("actor_name") String actorName
     );
+
 
 
     @Query(
