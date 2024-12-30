@@ -24,7 +24,7 @@ public class MovieDTO {
     private Integer censorship;
     private String category_id;
     private Boolean type;
-    private List<Episode_DTO> episodes;  // Danh sách tập phim
-    private List<Movie_ActorDTO> movieActors;  // Danh sách diễn viên
+    private List<Episode_DTO> episodes;
+    private List<Movie_ActorDTO> movieActors;
 }
 

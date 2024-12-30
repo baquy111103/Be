@@ -64,7 +64,7 @@ public class MovieController {
             return ResponseEntity.ok(Collections.emptyList());
         }
 
-        return ResponseEntity.ok(episodes); // Trả về danh sách tập phim theo movie_code
+        return ResponseEntity.ok(episodes);
     }
 
     @GetMapping("/category/{category_name}")
@@ -72,8 +72,8 @@ public class MovieController {
         List<MovieDTO> movies = movieService.getMoviesByCategoryName(category_name);
 
         if (movies.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 204 No Content
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(movies); // 200 OK
+        return ResponseEntity.ok(movies);
     }
 }

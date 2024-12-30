@@ -188,8 +188,8 @@ public class MovieService {
                 movie.getCensorship(),
                 movie.getCategory_id(),
                 movie.getType(),
-                null,  // Không load episodes
-                null   // Không load movieActors
+                null,
+                null
         )).toList();
     }
 }

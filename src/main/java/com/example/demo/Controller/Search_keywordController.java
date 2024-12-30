@@ -23,8 +23,8 @@ public class Search_keywordController {
     public ResponseEntity<List<Search_keyword>> getActiveKeywords() {
         List<Search_keyword> keywords = searchKeywordService.getActiveKeyword();
         if (keywords.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 204 No Content nếu không có dữ liệu
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(keywords); // 200 OK
+        return ResponseEntity.ok(keywords);
     }
 }

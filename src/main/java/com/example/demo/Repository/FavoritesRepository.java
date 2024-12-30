@@ -9,6 +9,9 @@ import java.util.List;
 
 
 public interface FavoritesRepository extends JpaRepository<Favorite, Long> {
-    @Query("SELECT f FROM Favorite f WHERE f.movie.movie_code = :movie_code")
+    @Query("SELECT f FROM Favorite f WHERE f.active = true")
+    List<Favorite> findAllFavorite();
+
+    @Query(value = "SELECT f FROM Favorite f WHERE f.movie.movie_code = :movie_code", nativeQuery = true)
     Favorite findByMovieCode(@Param("movie_code") String movie_code);
 }

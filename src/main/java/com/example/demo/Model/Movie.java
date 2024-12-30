@@ -44,7 +44,7 @@ public class Movie implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date release_date;
 
-    @Column(name= "duration") //thoi luong cua movie
+    @Column(name= "duration")
     private Double duration;
 
     @Column(name = "category_id")
@@ -57,7 +57,7 @@ public class Movie implements Serializable {
     private String image_url;
 
     @Column(name = "video_url")
-    private String video_url; // nếu là movie;
+    private String video_url;
 
     @Column(name = "status")
     private Boolean status; // 0 là xóa, 1 là hoạt động
